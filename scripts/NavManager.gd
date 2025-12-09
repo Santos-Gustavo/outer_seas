@@ -241,6 +241,7 @@ func _update_error_radius(distance_km: float, drift_magnitude: float) -> void:
 	est_error_radius = max(est_error_radius + inflate, drift_magnitude)
 
 
+
 func _emit_position_changed() -> void:
 	position_changed.emit(ship_pos, est_ship_pos, est_error_radius)
 

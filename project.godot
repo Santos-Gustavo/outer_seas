@@ -21,6 +21,7 @@ EventManager="*res://scripts/EventManager.gd"
 LogManager="*res://scripts/LogManager.gd"
 NavManager="*res://scripts/NavManager.gd"
 NavEncounterManager="*res://scripts/NavEncounterManager.gd"
+ToolManager="*res://scripts/ToolManager.gd"
 
 [display]
 

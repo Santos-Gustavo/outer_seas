@@ -17,8 +17,27 @@ func _ready() -> void:
 	NavManager.day_finished.connect(func(day_index: int, dist: float) -> void:
 		NavManager.nav_message.emit("Day %d complete. Sailed %.0f km." % [day_index, dist])
 	)
+	ToolManager.tool_used.connect(_on_tool_used)
 
 	_clear_log()
+
+func _on_tool_used(id: String, result: Dictionary) -> void:
+	if id == "spyglass":
+		_handle_spyglass_result(result)
+
+
+func _handle_spyglass_result(result: Dictionary) -> void:
+	if not result.get("found", false):
+		_add_line("Spyglass: nothing unusual in sight.")
+		return
+
+	var dir_label: String = result.get("direction_label", "somewhere")
+	var dist: float = result.get("distance", 0.0)
+	var region_id: String = result.get("region_id", "unknown")
+
+	# Don't over-narrate; keep it mechanical.
+	_add_line("Spyglass: activity detected to the %s, roughly %.0f km away." % [dir_label, dist])
+
 
 
 func _on_nav_message(text: String) -> void:
