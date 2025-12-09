@@ -28,7 +28,7 @@ func _init_regions() -> void:
 			"id": "capital",
 			"type": "island",
 			"shape": "circle",
-			"center": Vector2(50, 100),
+			"center": Vector2(500, 1000),
 			"radius": 50.0,
 			"event_on_enter": "cap_dock_arrival"
 		},

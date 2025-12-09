@@ -13,10 +13,10 @@ config_version=5
 config/name="One Piece Game"
 run/main_scene="res://scenes/Bridge.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
 
 [autoload]
 
+WorldLocations="*res://scripts/WorldLocations.gd"
 EventManager="*res://scripts/EventManager.gd"
 LogManager="*res://scripts/LogManager.gd"
 NavManager="*res://scripts/NavManager.gd"

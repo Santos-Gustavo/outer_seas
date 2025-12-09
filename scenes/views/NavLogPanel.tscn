@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dsf47ess7g12h"]
 
-[ext_resource type="Script" uid="uid://5vuh7ukec13" path="res://NavLogPanel.gd" id="1_lqbwy"]
+[ext_resource type="Script" uid="uid://5vuh7ukec13" path="res://scripts/NavLogPanel.gd" id="1_lqbwy"]
 
 [node name="NavLogPanel" type="Control"]
 layout_mode = 3

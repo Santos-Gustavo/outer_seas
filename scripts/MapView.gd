@@ -4,6 +4,7 @@ extends Control
 
 @onready var ship_marker: Control = %ShipMarker
 @onready var city_marker: Control = %CityMarker
+@onready var log_pose_needle: TextureRect = %Needle
 
 @onready var btn_heading_east: Button  = %TravelEast100Button
 @onready var btn_heading_south: Button = %TravelSouth100Button
@@ -20,6 +21,8 @@ extends Control
 # Simple conversion from world coords (km) to map coords (pixels)
 const MAP_SCALE: float = 1.0
 const MAP_OFFSET: Vector2 = Vector2(50.0, 0.0)
+var log_pose_target_pos: Vector2 = Vector2(320, 120)  # same as your ashfall center
+var log_pose_target_id: String = "ashfall"
 
 
 func _ready() -> void:
@@ -35,6 +38,8 @@ func _ready() -> void:
 	_set_city_marker_position()
 	var est_pos: Vector2 = NavManager.get_estimated_position()
 	_update_ship_marker(est_pos)
+	log_pose_needle.pivot_offset = log_pose_needle.size / 2.0
+	log_pose_target_pos = WorldLocations.get_position(log_pose_target_id)
 
 	# React to entering regions (visual feedback)
 	NavEncounterManager.region_entered.connect(func(id: String) -> void:
@@ -88,12 +93,25 @@ func _set_city_marker_position() -> void:
 @warning_ignore("unused_parameter")
 func _on_nav_position_changed(true_pos: Vector2, est_pos: Vector2, error_radius: float) -> void:
 	_update_ship_marker(est_pos)
+	_update_log_pose(true_pos)
 	# Later: also update a visual for error_radius (uncertainty circle)
 
 
 func _update_ship_marker(est_pos: Vector2) -> void:
 	var map_pos: Vector2 = est_pos * MAP_SCALE + MAP_OFFSET
 	ship_marker.position = map_pos
+
+func _update_log_pose(ship_pos: Vector2) -> void:
+	var to_target: Vector2 = log_pose_target_pos - ship_pos
+	if to_target.length() < 0.001:
+		return  # we're basically on top of it, avoid NaN nonsense
+
+	# Angle in radians from +X axis (east) to our target vector
+	var angle_rad: float = atan2(to_target.y, to_target.x)
+
+	# Godot 2D rotation uses radians; if your needle texture points to the right by default,
+	# this is enough. If you drew it pointing up, you need to subtract 90 degrees.
+	log_pose_needle.rotation = angle_rad + deg_to_rad(90.0)
 
 
 func _on_anchor_toggled() -> void:

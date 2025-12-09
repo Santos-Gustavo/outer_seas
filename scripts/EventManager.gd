@@ -71,16 +71,16 @@ func is_event_seen(event_id: String) -> bool:
 # Flags
 # -------------------------------------------------------------------
 
-func set_flag(name: String, value: bool = true) -> void:
-	flags[name] = value
+func set_flag(name_set_flag: String, value: bool = true) -> void:
+	flags[name_set_flag] = value
 
 
-func clear_flag(name: String) -> void:
-	flags.erase(name)
+func clear_flag(name_flag: String) -> void:
+	flags.erase(name_flag)
 
 
-func has_flag(name: String) -> bool:
-	return flags.get(name, false)
+func has_flag(name_has_flag: String) -> bool:
+	return flags.get(name_has_flag, false)
 
 
 # -------------------------------------------------------------------
@@ -158,12 +158,12 @@ func _apply_choice_consequences(event: Dictionary, choice: Dictionary) -> void:
 
 func _apply_flags_from_choice(choice: Dictionary) -> void:
 	var to_set: Array = choice.get("set_flags", [])
-	for name in to_set:
-		set_flag(name, true)
+	for names in to_set:
+		set_flag(names, true)
 
 	var to_clear: Array = choice.get("clear_flags", [])
-	for name in to_clear:
-		clear_flag(name)
+	for names in to_clear:
+		clear_flag(names)
 
 
 func _emit_log_updates(choice: Dictionary) -> void:
