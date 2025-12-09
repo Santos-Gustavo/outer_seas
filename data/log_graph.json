@@ -1,0 +1,170 @@
+{
+  "gov_mandate": {
+	"title": "World Government Mandate",
+	"category": "government",
+	"text": {
+		"The World Government claims to protect all seas from chaos and piracy. Its authority is presented as universal and benevolent.": true,
+		"The World Government claims to protect all seas from chaos and piracy. ": true,
+		},
+	"discovered": true,
+	"rumor":true,
+	"pos": [
+	  80,
+	  80
+	],
+	"links": [
+	  "gov_marines_role"
+	]
+  },
+  "gov_marines_role": {
+	"title": "Role of the Marines",
+	"category": "government",
+	"text": {
+		"Marines are described as peacekeepers who patrol trade routes, suppress pirates and protect civilians.": false,
+		"Marines are described as evil who patrol trade routes, suppress pirates and protect civilians.": false,
+		"suppress pirates and protect civilians.": true,
+		"Marines are described as  and protect civilians.": true,
+		},
+	"discovered": true,
+	"rumor": false,
+	"pos": [
+	  320,
+	  60
+	],
+	"links": [
+	  "gov_mandate",
+	  "groups_crimson_pirates",
+      "world_open_sea"
+	]
+  },
+  "gov_censorship": {
+	"title": "Censorship & Jamming Bureau",
+	"category": "government",
+	"text": {
+		"Rumors suggest a bureau that controls information and jams unauthorized broadcasts. Official documents deny such an organization exists.": false,
+		"Official documents deny such an organization exists.": false,
+	},
+	"discovered": true,
+	"rumor": false,
+	"pos": [
+	  320,
+	  140
+	],
+	"links": [
+	  "gov_mandate",
+	  "world_shrouded_eye",
+      "groups_official_news"
+	]
+  },
+  "world_sea_region": {
+	"title": "Northern Frontier Sea",
+	"category": "world",
+	"text": {
+		"A remote sea with only a few key islands. Officially described as dangerous and unstable, it is heavily patrolled by Marines.": true,
+		"A remote sea with only a few key islands. Officially .":false,
+		},
+	"discovered": true,
+	"rumor":true,
+	"pos": [
+	  180,
+	  220
+	],
+	"links": [
+	  "world_capital_island",
+	  "world_ashfall_colony",
+      "world_open_sea"
+	]
+  },
+  "world_capital_island": {
+	"title": "Capital Island",
+	"category": "world",
+	"text": {
+		"The main government stronghold in this sea. It hosts Marine headquarters, courts, and official administration.": true,
+		"The main government stronghold in this sea. It hosts Marine headquarters.": false,
+		},
+	"discovered": true,
+	"rumor": true,
+	"pos": [
+	  40,
+	  220
+	],
+	"links": [
+	  "world_sea_region",
+	  "gov_mandate",
+      "groups_official_news"
+	]
+  },
+  "world_ashfall_colony": {
+	"title": "Ashfall Mining Colony",
+	"category": "world",
+	"text": {
+		"A mining island under heavy taxation and 'protection' from nearby Marine forces. Locals whisper about disappearances and crackdowns.": true,
+		"A mining island under heavy taxation and 'protection' from nearby Marine forces. ": false,
+		},
+	"discovered": false, 
+	"rumor":true,
+	"pos": [
+	  320,
+	  260
+	],
+	"links": [
+	  "world_sea_region",
+	  "groups_ashfall_resistance",
+      "gov_marines_role"
+	]
+  },
+  "groups_crimson_pirates": {
+	"title": "Crimson Tide Pirates",
+	"category": "groups",
+	"text": {
+		"Branded as ruthless pirates who attack civilian ships. Most reports about them come from government and official news channels.": true,
+		"Branded as ruthless pirates who attack civilian ships. Most reports": false,
+		},
+	"discovered": true, 
+	"rumor":true,
+	"pos": [
+	  520,
+	  80
+	],
+	"links": [
+	  "gov_marines_role",
+	  "groups_merchants_guild",
+      "world_open_sea"
+	]
+  },
+  "groups_ashfall_resistance": {
+	"title": "Ashfall Resistance",
+	"category": "groups",
+	"text": {
+		"Miners and locals on Ashfall accused of piracy and sabotage. Some eyewitnesses claim they are resisting exploitation, not preying on civilians.":true,
+		"Miners and locals on Ashfaploitation, not preying on civilians.":true,
+		},
+	"discovered": false, 
+	"rumor":true,
+	"pos": [
+	  520,
+	  260
+	],
+	"links": [
+	  "world_ashfall_colony",
+      "groups_merchants_guild"
+	]
+  },
+  "groups_official_news": {
+	"title": "Official News Service",
+	"category": "groups",
+	"text": {
+		"The main source of 'truth' in this sea. Headlines closely mirror government press releases, downplaying abuses and focusing on pirate threats.":true,
+		"The main source of 'truthing abuses and focusing on pirate threats.":true,
+		},
+	"discovered": false, 
+	"rumor":true,
+	"pos": [
+	  520,
+	  180
+	],
+	"links": [
+      "groups_crimson_pirates"
+	]
+  }
+}

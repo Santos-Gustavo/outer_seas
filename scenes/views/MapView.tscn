@@ -1,0 +1,212 @@
+[gd_scene load_steps=7 format=3 uid="uid://23mfwfghdgw4"]
+
+[ext_resource type="Script" uid="uid://bsxl4ndcj40yt" path="res://scripts/MapView.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://5vd6bqw0nh4k" path="res://assets/map_base.png" id="2_y0qwx"]
+[ext_resource type="Texture2D" uid="uid://b2k5qdmpvxgmj" path="res://assets/Previews/ship-pirate-small.png" id="3_kiai8"]
+[ext_resource type="Texture2D" uid="uid://cdiougk64bgdd" path="res://assets/Previews/compass.png" id="4_86llr"]
+[ext_resource type="Texture2D" uid="uid://dt8yqc0l87v7w" path="res://assets/Previews/ship-pirate-large.png" id="4_xqd6u"]
+[ext_resource type="PackedScene" uid="uid://dsf47ess7g12h" path="res://scenes/views/NavLogPanel.tscn" id="5_neov0"]
+
+[node name="MapView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Sea Map"
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="btn_capital" type="Button" parent="VBoxContainer/Buttons"]
+visible = false
+layout_mode = 2
+text = "Capital"
+
+[node name="btn_ashfall" type="Button" parent="VBoxContainer/Buttons"]
+visible = false
+layout_mode = 2
+text = "Ashfall"
+
+[node name="btn_open_sea" type="Button" parent="VBoxContainer/Buttons"]
+visible = false
+layout_mode = 2
+text = "Open Sea"
+
+[node name="AnchorToggleButton" type="Button" parent="VBoxContainer/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Anchor"
+
+[node name="Speed0xButton" type="Button" parent="VBoxContainer/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "II"
+
+[node name="Speed1xButton" type="Button" parent="VBoxContainer/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ">"
+
+[node name="Speed3xButton" type="Button" parent="VBoxContainer/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ">>"
+
+[node name="Speed5xButton" type="Button" parent="VBoxContainer/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ">>>"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="LeftPanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(1600, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MapRoot" type="Control" parent="VBoxContainer/MarginContainer/HBoxContainer/LeftPanelContainer"]
+layout_mode = 2
+
+[node name="MapTexture" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/LeftPanelContainer/MapRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_y0qwx")
+expand_mode = 1
+
+[node name="Markers" type="Control" parent="VBoxContainer/MarginContainer/HBoxContainer/LeftPanelContainer/MapRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShipMarker" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/LeftPanelContainer/MapRoot/Markers"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_kiai8")
+
+[node name="CityMarker" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/LeftPanelContainer/MapRoot/Markers"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_xqd6u")
+
+[node name="NavControls" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/LeftPanelContainer/MapRoot"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -520.0
+offset_top = -260.0
+offset_bottom = 260.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/LeftPanelContainer/MapRoot/NavControls"]
+layout_mode = 2
+texture = ExtResource("4_86llr")
+
+[node name="TravelEast100Button" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/LeftPanelContainer/MapRoot/NavControls/TextureRect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -55.0
+offset_bottom = 55.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="TravelSouth100Button" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/LeftPanelContainer/MapRoot/NavControls/TextureRect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -110.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 3
+
+[node name="TravelWest100Button" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/LeftPanelContainer/MapRoot/NavControls/TextureRect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -55.0
+offset_right = 200.0
+offset_bottom = 55.0
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="TravelNorth100Button" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/LeftPanelContainer/MapRoot/NavControls/TextureRect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 110.0
+grow_horizontal = 2
+size_flags_vertical = 3
+
+[node name="RightPanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NavLogPanel" parent="VBoxContainer/MarginContainer/HBoxContainer/RightPanelContainer" instance=ExtResource("5_neov0")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 1

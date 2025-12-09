@@ -1,0 +1,757 @@
+{
+  "events": {
+	"cap_dock_arrival": {
+	  "id": "cap_dock_arrival",
+	  "title": "Arrival at Capital Island",
+	  "location": "capital",
+	  "once": true,
+	  "triggers": ["start"],
+	  "text": [
+		"Your ship eases into the harbor of Capital Island under a sky crowded with flags.",
+		"Marines in crisp uniforms wave you toward an inspection pier. Loudspeakers repeat that the World Government keeps this sea safe.",
+        "Crew eyes drift between the spotless docks and the distant silhouettes of patrol ships."
+	  ],
+	  "choices": [
+		{
+		  "id": "follow_official_channel",
+		  "label": "Dock at the official inspection pier.",
+		  "outcome_text": [
+			"You comply with the harbor officer's gestures and let the Marines secure your lines.",
+            "An officer in a pressed coat approaches with a clipboard and a practiced smile."
+		  ],
+		  "set_flags": ["met_harbor_officer"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "world_capital_island",
+			  "discovered": true,
+			  "rumor": false
+			},
+			{
+			  "entry_id": "gov_mandate",
+			  "discovered": true,
+			  "rumor": false
+			}
+		  ],
+		  "next_event": "cap_marines_brief"
+		},
+		{
+		  "id": "request_free_dock",
+		  "label": "Ask for a free strip away from the Marines.",
+		  "outcome_text": [
+			"You hail the harbor tower and request an independent dock. There is a pause, then an annoyed voice redirects you to a neglected berth at the edge of the harbor.",
+            "Nadia notes how empty that section is compared to the official piers."
+		  ],
+		  "set_flags": ["used_free_dock"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "world_capital_island",
+			  "discovered": true,
+			  "rumor": false
+			}
+		  ],
+		  "next_event": "cap_back_alley_rumors"
+		}
+	  ]
+	},
+
+	"cap_marines_brief": {
+	  "id": "cap_marines_brief",
+	  "title": "Harbor Briefing",
+	  "location": "capital",
+	  "once": true,
+	  "triggers": ["after_event:cap_dock_arrival"],
+	  "text": [
+		"Inside a cramped harbor office, a Marine officer outlines the 'current security situation'.",
+        "Charts on the wall show shipping lanes, red circles around 'pirate hotspots', and a neat banner: 'Peace Through Strength'."
+	  ],
+	  "choices": [
+		{
+		  "id": "accept_briefing",
+		  "label": "Nod along and accept their information.",
+		  "outcome_text": [
+			"You sign the standard forms and accept a stamped packet of 'safety advisories'.",
+            "The officer stresses that any unidentified ships should be reported immediately."
+		  ],
+		  "set_flags": ["trusts_marines_brief"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "gov_marines_role",
+			  "discovered": true,
+			  "rumor": false
+			},
+			{
+			  "entry_id": "world_sea_region",
+			  "discovered": true,
+			  "rumor": false
+			}
+		  ],
+		  "next_event": "cap_newspaper_kiosk"
+		},
+		{
+		  "id": "ask_probings_questions",
+		  "label": "Ask probing questions about 'pirate' incidents.",
+		  "outcome_text": [
+			"You press the officer about routes, casualty lists, and patterns. Answers come slower, less smooth.",
+            "A second officer quietly flips a ledger closed when you lean closer."
+		  ],
+		  "set_flags": ["suspicious_of_marines"],
+		  "clear_flags": ["trusts_marines_brief"],
+		  "log_updates": [
+			{
+			  "entry_id": "gov_marines_role",
+			  "discovered": true,
+			  "rumor": true
+			}
+		  ],
+		  "next_event": "cap_censored_broadcast"
+		}
+	  ]
+	},
+
+	"cap_newspaper_kiosk": {
+	  "id": "cap_newspaper_kiosk",
+	  "title": "Official News on the Street",
+	  "location": "capital",
+	  "once": true,
+	  "triggers": ["after_event:cap_marines_brief"],
+	  "text": [
+		"On your way back to the ship, an official news kiosk blares headlines.",
+        "Front-page stories celebrate recent Marine 'victories' over pirates and praise increased patrol funding."
+	  ],
+	  "choices": [
+		{
+		  "id": "buy_paper",
+		  "label": "Buy a newspaper and scan the details.",
+		  "outcome_text": [
+			"You buy a copy and skim the articles. Most quotes are from government spokespeople; names of 'pirates' are vague or redacted.",
+            "A small sidebar mentions a mining 'labor dispute' in passing."
+		  ],
+		  "set_flags": ["read_official_news_capital"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "groups_official_news",
+			  "discovered": true,
+			  "rumor": false
+			},
+			{
+			  "entry_id": "world_ashfall_colony",
+			  "discovered": true,
+			  "rumor": true
+			}
+		  ],
+		  "next_event": "sea_patrol_intercept"
+		},
+		{
+		  "id": "ignore_headlines",
+		  "label": "Ignore the headlines and head straight back.",
+		  "outcome_text": [
+			"You walk past the kiosk without stopping. Nadia lingers for a second, reading a headline about 'violent agitators' in a mining colony.",
+            "Back aboard, she keeps glancing at the folded corner of a free copy left on a crate."
+		  ],
+		  "set_flags": ["passed_official_news"],
+		  "clear_flags": [],
+		  "log_updates": [],
+		  "next_event": "sea_patrol_intercept"
+		}
+	  ]
+	},
+
+	"cap_back_alley_rumors": {
+	  "id": "cap_back_alley_rumors",
+	  "title": "Whispers by the Docks",
+	  "location": "capital",
+	  "once": true,
+	  "triggers": ["after_event:cap_dock_arrival"],
+	  "text": [
+		"Away from the official piers, the docks look older, patched together from mismatched wood and rusting metal.",
+        "A pair of stevedores argue in low voices about 'another raid' and 'people disappearing on Ashfall'."
+	  ],
+	  "choices": [
+		{
+		  "id": "listen_in",
+		  "label": "Pretend to check your lines and listen in.",
+		  "outcome_text": [
+			"You catch fragments: Marines, a night raid, miners taken for 'questioning' and never seen again.",
+            "When they notice you, the stevedores change the subject and hurry off."
+		  ],
+		  "set_flags": ["heard_ashfall_rumors"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "world_ashfall_colony",
+			  "discovered": true,
+			  "rumor": true
+			},
+			{
+			  "entry_id": "groups_ashfall_resistance",
+			  "discovered": true,
+			  "rumor": true
+			}
+		  ],
+		  "next_event": "sea_patrol_intercept"
+		},
+		{
+		  "id": "approach_them",
+		  "label": "Approach and ask what happened.",
+		  "outcome_text": [
+			"At first they deny everything. When you insist you're not Marine, one finally mutters that 'not all pirates fly skulls' and that miners are being pushed too far.",
+            "They warn you to stay away from Ashfall unless you want trouble with both sides."
+		  ],
+		  "set_flags": ["heard_ashfall_rumors", "dock_workers_contact"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "groups_ashfall_resistance",
+			  "discovered": true,
+			  "rumor": true
+			}
+		  ],
+		  "next_event": "sea_patrol_intercept"
+		}
+	  ]
+	},
+
+	"cap_censored_broadcast": {
+	  "id": "cap_censored_broadcast",
+	  "title": "Interrupted Broadcast",
+	  "location": "capital",
+	  "once": true,
+	  "triggers": ["after_event:cap_marines_brief"],
+	  "text": [
+		"Back aboard your ship, the Den Den Mushi crackles with a scheduled news broadcast.",
+        "Halfway through an interview with a local merchant about 'rising tensions', the audio glitches, and the feed cuts to a cheerful anthem."
+	  ],
+	  "choices": [
+		{
+		  "id": "investigate_signal",
+		  "label": "Have Isha check the signal logs.",
+		  "outcome_text": [
+			"Isha pulls up the signal diagnostics: a spike in jamming at the exact second the interview took a critical turn.",
+            "The logs list the source as 'Government Relay Node – Priority Override'."
+		  ],
+		  "set_flags": ["noticed_censorship"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "gov_censorship",
+			  "discovered": true,
+			  "rumor": true
+			},
+			{
+			  "entry_id": "groups_official_news",
+			  "discovered": true,
+			  "rumor": false
+			}
+		  ],
+		  "next_event": "sea_patrol_intercept"
+		},
+		{
+		  "id": "shrug_it_off",
+		  "label": "Assume it was just interference.",
+		  "outcome_text": [
+			"You chalk it up to bad weather or a faulty relay. Isha frowns but doesn't push it.",
+            "The Mushi plays the anthem three more times before static returns."
+		  ],
+		  "set_flags": ["ignored_censorship_glitch"],
+		  "clear_flags": [],
+		  "log_updates": [],
+		  "next_event": "sea_patrol_intercept"
+		}
+	  ]
+	},
+
+	"sea_patrol_intercept": {
+	  "id": "sea_patrol_intercept",
+	  "title": "Patrol Intercept",
+	  "location": "open_sea",
+	  "once": true,
+	  "triggers": ["leaving_capital"],
+	  "text": [
+		"Hours out from Capital Island, a Marine patrol ship orders you to reduce speed.",
+        "They claim to be checking for 'pirate infiltration' and ask for your planned route."
+	  ],
+	  "choices": [
+		{
+		  "id": "cooperate_fully",
+		  "label": "Share your intended route and cargo details.",
+		  "outcome_text": [
+			"You provide honest details. The patrol logs your route and warns you about 'aggressive pirate elements' near Ashfall.",
+            "Nadia quietly notes that they seem more interested in outbound ships than inbound ones."
+		  ],
+		  "set_flags": ["patrol_trusts_you"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "world_sea_region",
+			  "discovered": true,
+			  "rumor": false
+			},
+			{
+			  "entry_id": "groups_crimson_pirates",
+			  "discovered": true,
+			  "rumor": true
+			}
+		  ],
+		  "next_event": "sea_distress_signal"
+		},
+		{
+		  "id": "be_vague",
+		  "label": "Give vague answers and a generic route.",
+		  "outcome_text": [
+			"You keep your answers noncommittal. The patrol lingers off your stern longer than necessary.",
+            "Isha picks up encrypted chatter mentioning your ship's ID."
+		  ],
+		  "set_flags": ["patrol_suspicious"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "world_sea_region",
+			  "discovered": true,
+			  "rumor": false
+			}
+		  ],
+		  "next_event": "sea_distress_signal"
+		}
+	  ]
+	},
+
+	"sea_distress_signal": {
+	  "id": "sea_distress_signal",
+	  "title": "Distress in the Frontier",
+	  "location": "open_sea",
+	  "once": true,
+	  "triggers": ["after_event:sea_patrol_intercept"],
+	  "text": [
+		"Later that night, the Den Den Mushi jolts awake with a faint distress call.",
+        "The voice is hurried, mentioning a mining convoy, 'unmarked hulls', and Marines 'protecting the wrong side'."
+	  ],
+	  "choices": [
+		{
+		  "id": "respond_openly",
+		  "label": "Respond on an open channel.",
+		  "outcome_text": [
+			"You answer on the standard emergency frequency. The caller cuts off mid-sentence, replaced by Marine traffic insisting the situation is 'under control'.",
+            "Isha records a brief fragment with coordinates near Ashfall before the channel goes dead."
+		  ],
+		  "set_flags": ["ashfall_distress_logged"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "world_ashfall_colony",
+			  "discovered": true,
+			  "rumor": true
+			}
+		  ],
+		  "next_event": "ash_dock_tension",
+		  "goto_location": "ashfall"
+		},
+		{
+		  "id": "switch_to_secure",
+		  "label": "Try to switch to a secure side channel.",
+		  "outcome_text": [
+			"Isha scrambles to lock in a narrowband connection. For a few seconds, you hear clear words: 'miners shot', 'resistance', 'Marines covering it up'.",
+            "A jamming spike cuts the line, but the coordinates and a ship name are saved."
+		  ],
+		  "set_flags": ["ashfall_distress_logged", "heard_resistance_direct"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "groups_ashfall_resistance",
+			  "discovered": true,
+			  "rumor": true
+			}
+		  ],
+		  "next_event": "ash_dock_tension",
+		  "goto_location": "ashfall"
+		}
+	  ]
+	},
+
+	"ash_dock_tension": {
+	  "id": "ash_dock_tension",
+	  "title": "Tension at Ashfall",
+	  "location": "ashfall",
+	  "once": true,
+	  "triggers": ["enter_ashfall"],
+	  "text": [
+		"Ashfall's docks are crowded with ore barges and armed escorts. Marines watch from elevated platforms.",
+        "Workers move quickly, eyes down, while propaganda posters warn about 'pirate collaborators among the miners'."
+	  ],
+	  "choices": [
+		{
+		  "id": "dock_under_marines",
+		  "label": "Dock at the Marine-controlled pier.",
+		  "outcome_text": [
+			"A local foreman is forced to speak highly of Marine protection with an officer looming nearby.",
+            "Off the record, his eyes say something different."
+		  ],
+		  "set_flags": ["ashfall_seen_marines_control"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "world_ashfall_colony",
+			  "discovered": true,
+			  "rumor": false
+			}
+		  ],
+		  "next_event": "ash_mine_tour"
+		},
+		{
+		  "id": "dock_with_miners",
+		  "label": "Seek a berth among the miners' barges.",
+		  "outcome_text": [
+			"You find space between battered barges. A miner quietly asks if you heard a distress call recently.",
+            "They hint that not every 'pirate attack' is what the news claims."
+		  ],
+		  "set_flags": ["ashfall_miners_contact"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "groups_ashfall_resistance",
+			  "discovered": true,
+			  "rumor": true
+			}
+		  ],
+		  "next_event": "ash_mine_tour"
+		}
+	  ]
+	},
+
+	"ash_mine_tour": {
+	  "id": "ash_mine_tour",
+	  "title": "Tour of the Mines",
+	  "location": "ashfall",
+	  "once": true,
+	  "triggers": ["after_event:ash_dock_tension"],
+	  "text": [
+		"You are escorted through the mine's loading areas. Work is loud, hurried, and heavily supervised.",
+        "Crude memorials for dead miners are tucked into corners away from Marine patrol routes."
+	  ],
+	  "choices": [
+		{
+		  "id": "speak_with_overseer",
+		  "label": "Speak to the company overseer.",
+		  "outcome_text": [
+			"The overseer repeats the official line: 'troublemakers', 'outside agitators', 'necessary discipline'.",
+            "When pressed about casualties, they insist all incidents are 'handled by the Marines'."
+		  ],
+		  "set_flags": ["heard_company_line"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "groups_official_news",
+			  "discovered": true,
+			  "rumor": false
+			}
+		  ],
+		  "next_event": "ash_night_meeting"
+		},
+		{
+		  "id": "slip_away",
+		  "label": "Slip away to talk to workers directly.",
+		  "outcome_text": [
+			"In a dim side tunnel, miners tell you about raids labeled as 'anti-pirate operations' that only ever hit their organizers.",
+            "They ask if your ship can 'look the other way' if they ever call for help."
+		  ],
+		  "set_flags": ["miners_trust_you"],
+		  "clear_flags": ["heard_company_line"],
+		  "log_updates": [
+			{
+			  "entry_id": "groups_ashfall_resistance",
+			  "discovered": true,
+			  "rumor": false
+			}
+		  ],
+		  "next_event": "ash_night_meeting"
+		}
+	  ]
+	},
+
+	"ash_night_meeting": {
+	  "id": "ash_night_meeting",
+	  "title": "A Meeting After Curfew",
+	  "location": "ashfall",
+	  "once": true,
+	  "triggers": ["after_event:ash_mine_tour"],
+	  "text": [
+		"After dark, a coded knock on your gangplank announces visitors.",
+        "Hooded miners step aboard, asking for passage in exchange for the truth about 'pirate attacks'."
+	  ],
+	  "choices": [
+		{
+		  "id": "hear_them_out",
+		  "label": "Let them speak and listen fully.",
+		  "outcome_text": [
+			"They describe targeted arrests, staged raids, and Marines escorting ore shipments while beating down organizers.",
+            "They insist the so-called 'Crimson Tide' pirates are a convenient mask for crushing resistance."
+		  ],
+		  "set_flags": ["met_ashfall_resistance"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "groups_ashfall_resistance",
+			  "discovered": true,
+			  "rumor": false
+			},
+			{
+			  "entry_id": "groups_crimson_pirates",
+			  "discovered": true,
+			  "rumor": true
+			}
+		  ],
+		  "next_event": "ash_raid_aftermath"
+		},
+		{
+		  "id": "turn_them_away",
+		  "label": "Refuse to get involved and send them away.",
+		  "outcome_text": [
+			"They leave in silence. Rook watches their shadows disappear into the dark and mutters that trouble will come here with or without you.",
+            "The night feels heavier than the smoke drifting from the mines."
+		  ],
+		  "set_flags": ["refused_resistance_meeting"],
+		  "clear_flags": [],
+		  "log_updates": [],
+		  "next_event": "ash_raid_aftermath"
+		}
+	  ]
+	},
+
+	"ash_raid_aftermath": {
+	  "id": "ash_raid_aftermath",
+	  "title": "Raid at Dawn",
+	  "location": "ashfall",
+	  "once": true,
+	  "triggers": ["after_event:ash_night_meeting"],
+	  "text": [
+		"At dawn, gunfire echoes across the docks. Marines storm a miners' dormitory, shouting about 'pirate collaborators'.",
+        "Smoke and shouting fill the air; official loudspeakers call it a 'successful anti-piracy operation'."
+	  ],
+	  "choices": [
+		{
+		  "id": "assist_marines",
+		  "label": "Align with Marines and help secure the perimeter.",
+		  "outcome_text": [
+			"You offer your ship's sensors and crew to help 'identify threats'. The Marines accept, logging your cooperation.",
+            "The official report lists 'minimal collateral damage' and 'decisive action against piracy'."
+		  ],
+		  "set_flags": ["sided_with_marines_ashfall"],
+		  "clear_flags": ["miners_trust_you"],
+		  "log_updates": [
+			{
+			  "entry_id": "gov_marines_role",
+			  "discovered": true,
+			  "rumor": false
+			},
+			{
+			  "entry_id": "groups_official_news",
+			  "discovered": true,
+			  "rumor": false
+			}
+		  ],
+		  "next_event": "sea_smuggler_meet",
+		  "goto_location": "open_sea"
+		},
+		{
+		  "id": "help_miners",
+		  "label": "Quietly help miners escape under cover of chaos.",
+		  "outcome_text": [
+			"You use your tools to mark blind spots in Marine patrols. A handful of miners slip aboard small boats and vanish into the mist.",
+            "Later, Marine logs note 'suspected smuggler cooperation' but no evidence is found."
+		  ],
+		  "set_flags": ["sided_with_resistance_ashfall"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "groups_ashfall_resistance",
+			  "discovered": true,
+			  "rumor": false
+			}
+		  ],
+		  "next_event": "sea_smuggler_meet",
+		  "goto_location": "open_sea"
+		}
+	  ]
+	},
+
+	"sea_smuggler_meet": {
+	  "id": "sea_smuggler_meet",
+	  "title": "Unmarked Sails",
+	  "location": "open_sea",
+	  "once": true,
+	  "triggers": ["after_event:ash_raid_aftermath"],
+	  "text": [
+		"Far from the main lanes, your spyglass picks out an unmarked ship shadowing your course.",
+        "Its captain hails you on a narrow-band frequency, offering information about 'who really profits from piracy here'."
+	  ],
+	  "choices": [
+		{
+		  "id": "meet_them",
+		  "label": "Agree to meet alongside in calm waters.",
+		  "outcome_text": [
+			"Up close, the ship is patched and under-armed for a 'pirate'. The captain shares logs showing Marines escorting cargo one day and attacking 'pirates' the next.",
+            "They claim the Crimson Tide is mostly a story to justify tightening control."
+		  ],
+		  "set_flags": ["met_smuggler_captain"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "groups_crimson_pirates",
+			  "discovered": true,
+			  "rumor": false
+			}
+		  ],
+		  "next_event": "storm_edge_scan",
+		  "goto_location": "storm_edge"
+		},
+		{
+		  "id": "drive_them_off",
+		  "label": "Threaten them and drive them off.",
+		  "outcome_text": [
+			"You warn them that Marines are watching and they'll be next. The unmarked ship fades into the haze without firing a shot.",
+            "Rook mutters that they didn't sail like raiders. Nadia logs the encounter anyway."
+		  ],
+		  "set_flags": ["rejected_smuggler_meet"],
+		  "clear_flags": [],
+		  "log_updates": [],
+		  "next_event": "storm_edge_scan",
+		  "goto_location": "storm_edge"
+		}
+	  ]
+	},
+
+	"storm_edge_scan": {
+	  "id": "storm_edge_scan",
+	  "title": "The Shrouded Edge",
+	  "location": "storm_edge",
+	  "once": true,
+	  "triggers": ["reached_storm_edge"],
+	  "text": [
+		"Ahead, a wall of storm clouds rises like a living thing: the sea's infamous central maelstrom.",
+        "Instruments flicker. Compass and Log Pose needles twitch erratically as waves roll under your hull."
+	  ],
+	  "choices": [
+		{
+		  "id": "scan_carefully",
+		  "label": "Use all tools to scan the storm edge carefully.",
+		  "outcome_text": [
+			"You coordinate compass, spyglass, Mushi diagnostics, and Log Pose readings. Patterns emerge: gaps in patrol coverage, a rhythm in the storm itself.",
+            "You realize the storm hides routes too costly for the World Government to fully lock down."
+		  ],
+		  "set_flags": ["storm_mapped"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "world_sea_region",
+			  "discovered": true,
+			  "rumor": false
+			}
+		  ],
+		  "next_event": "storm_black_box"
+		},
+		{
+		  "id": "rush_in",
+		  "label": "Trust your instincts and push closer.",
+		  "outcome_text": [
+			"Rook curses as the hull shudders. Instruments jump wildly, but in the chaos, you see a fleeting pattern in the arcs of lightning.",
+            "It's risky, but you feel you could thread a path if you commit."
+		  ],
+		  "set_flags": ["storm_risk_taker"],
+		  "clear_flags": [],
+		  "log_updates": [],
+		  "next_event": "storm_black_box"
+		}
+	  ]
+	},
+
+	"storm_black_box": {
+	  "id": "storm_black_box",
+	  "title": "Black Box Broadcast",
+	  "location": "storm_edge",
+	  "once": true,
+	  "triggers": ["after_event:storm_edge_scan"],
+	  "text": [
+		"In the static at the storm's edge, the Den Den Mushi picks up a burst of compressed data.",
+        "Isha recognizes the signature: an emergency recorder from a ship 'lost to pirates' months ago."
+	  ],
+	  "choices": [
+		{
+		  "id": "decode_and_compare",
+		  "label": "Decode it and compare with official reports.",
+		  "outcome_text": [
+			"The recorder tells a different story: Marines fired first on a 'suspect vessel', then reported the loss as piracy.",
+            "Official news omitted entire sections of the encounter."
+		  ],
+		  "set_flags": ["confirmed_government_lies"],
+		  "clear_flags": [],
+		  "log_updates": [
+			{
+			  "entry_id": "gov_censorship",
+			  "discovered": true,
+			  "rumor": false
+			},
+			{
+			  "entry_id": "groups_official_news",
+			  "discovered": true,
+			  "rumor": false
+			}
+		  ],
+		  "next_event": "final_course_set"
+		},
+		{
+		  "id": "forward_to_marines",
+		  "label": "Forward the recorder directly to Marines.",
+		  "outcome_text": [
+			"You transmit the data to the nearest Marine relay. They reply with a curt thanks and an instruction not to speak of 'ongoing investigations'.",
+            "On open channels, the incident remains labeled a 'pirate attack'."
+		  ],
+		  "set_flags": ["helped_coverup"],
+		  "clear_flags": [],
+		  "log_updates": [],
+		  "next_event": "final_course_set"
+		}
+	  ]
+	},
+
+	"final_course_set": {
+	  "id": "final_course_set",
+	  "title": "Course to the Truth",
+	  "location": "ship",
+	  "once": true,
+	  "triggers": ["after_event:storm_black_box"],
+	  "text": [
+		"Back on the bridge, the crew looks to you. You have fragments of the truth: resistance pleas, doctored reports, censored broadcasts.",
+        "Ahead, the storm hides a route not even the World Government can fully script."
+	  ],
+	  "choices": [
+		{
+		  "id": "commit_to_revolution",
+		  "label": "Set a course that will turn your knowledge into open defiance.",
+		  "outcome_text": [
+			"You mark a route through the storm that will spread these truths to every island willing to listen.",
+            "Whatever waits beyond the maelstrom, you will not sail for the World Government again."
+		  ],
+		  "set_flags": ["ending_revolution"],
+		  "clear_flags": [],
+		  "log_updates": [],
+		  "next_event": null
+		},
+		{
+		  "id": "try_to_reform_within",
+		  "label": "Plan to work within the system, armed with what you know.",
+		  "outcome_text": [
+			"You set a route back toward Capital Island, intending to leak what you've learned carefully, choosing allies inside the system.",
+            "The storm remains at your back, a reminder that some truths are too large to hide forever."
+		  ],
+		  "set_flags": ["ending_reformist"],
+		  "clear_flags": [],
+		  "log_updates": [],
+		  "next_event": null
+		}
+	  ]
+	}
+  }
+}
