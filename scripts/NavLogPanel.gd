@@ -15,7 +15,7 @@ func _ready() -> void:
 	# Subscribe to nav messages
 	NavManager.nav_message.connect(_on_nav_message)
 	NavManager.day_finished.connect(func(day_index: int, dist: float) -> void:
-		NavManager.nav_message.emit("Day %d complete. Sailed %.0f km." % [day_index, dist])
+		NavManager.nav_message.emit("Day %d complete. Sailed %.0f km. Position is %s" % [day_index, dist, NavManager.ship_pos])
 	)
 	ToolManager.tool_used.connect(_on_tool_used)
 

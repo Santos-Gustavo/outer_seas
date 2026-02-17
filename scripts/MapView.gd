@@ -12,13 +12,8 @@ extends Control
 
 @onready var nav_log: NavLogPanel = %NavLogPanel
 
-@onready var btn_heading_east: Button  = %TravelEast100Button
-@onready var btn_heading_south: Button = %TravelSouth100Button
-@onready var btn_heading_west: Button  = %TravelWest100Button
-@onready var btn_heading_north: Button = %TravelNorth100Button
 
 
-@onready var btn_anchor_toggle: Button = %AnchorToggleButton
 @onready var btn_speed_0x: Button      = %Speed0xButton
 @onready var btn_speed_1x: Button      = %Speed1xButton
 @onready var btn_speed_3x: Button      = %Speed3xButton
@@ -40,11 +35,6 @@ func _ready() -> void:
 	# Listen to navigation updates
 	print("MAP_ZOOM at startup: ", MAP_ZOOM)
 	NavManager.position_changed.connect(_on_nav_position_changed)
-
-	# Heading / speed / anchor controls
-	_setup_heading_controls()
-	_setup_speed_controls()
-	_setup_anchor_button()
 	
 	btn_spyglass.pressed.connect(func() -> void:
 		ToolManager.use_spyglass()
@@ -63,35 +53,27 @@ func _ready() -> void:
 	)
 
 
-func _setup_heading_controls() -> void:
-	# 0° = east, 90° = south, 180° = west, 270° = north
-	btn_heading_east.pressed.connect(func() -> void:
-		NavManager.set_heading(0.0)
-	)
-	btn_heading_south.pressed.connect(func() -> void:
-		NavManager.set_heading(90.0)
-	)
-	btn_heading_west.pressed.connect(func() -> void:
-		NavManager.set_heading(180.0)
-	)
-	btn_heading_north.pressed.connect(func() -> void:
-		NavManager.set_heading(270.0)
-	)
+func _unhandled_key_input(event: InputEvent):
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_D:
+			NavManager.set_heading(0.0)
+		if event.pressed and event.keycode == KEY_S:
+			NavManager.set_heading(90.0)
+		if event.pressed and event.keycode == KEY_A:
+			NavManager.set_heading(180.0)
+		if event.pressed and event.keycode == KEY_W:
+			NavManager.set_heading(270.0)
 
+		if event.pressed and event.keycode == KEY_SPACE:
+			_on_anchor_toggled()
 
-func _setup_speed_controls() -> void:
-	btn_speed_0x.pressed.connect(func() -> void:
-		NavManager.set_time_scale(0.0)
-	)
-	btn_speed_1x.pressed.connect(func() -> void:
-		NavManager.set_time_scale(1.0)
-	)
-	btn_speed_3x.pressed.connect(func() -> void:
-		NavManager.set_time_scale(3.0)
-	)
-	btn_speed_5x.pressed.connect(func() -> void:
-		NavManager.set_time_scale(5.0)
-	)
+		if event.pressed and event.keycode == KEY_1:
+			NavManager.set_time_scale(1.0)
+		if event.pressed and event.keycode == KEY_2:
+			NavManager.set_time_scale(3.0)
+		if event.pressed and event.keycode == KEY_3:
+			NavManager.set_time_scale(5.0)
+
 
 
 func _update_map_window(est_pos: Vector2) -> void:
@@ -114,13 +96,6 @@ func _update_map_window(est_pos: Vector2) -> void:
 	map_content.position = map_offset
 
 
-func _setup_anchor_button() -> void:
-	btn_anchor_toggle.pressed.connect(_on_anchor_toggled)
-	# Initial label based on current state
-	var anchored: bool = NavManager.is_anchored
-	btn_anchor_toggle.text = "Lift Anchor" if anchored else "Drop Anchor"
-
-
 func _set_city_marker_position() -> void:
 	# For now, just a fixed position; later you can map world coords
 	city_marker.position = Vector2(50.0, 100.0)
@@ -129,7 +104,7 @@ func _set_city_marker_position() -> void:
 func _on_nav_position_changed(true_pos: Vector2, est_pos: Vector2, error_radius: float) -> void:
 	_update_map_window(est_pos)
 	_update_log_pose(true_pos)
-	_update_uncertainty(error_radius)
+	#_update_uncertainty(error_radius)
 
 
 func _update_ship_marker(est_pos: Vector2) -> void:
@@ -164,7 +139,6 @@ func _update_uncertainty(error_radius_world: float) -> void:
 func _on_anchor_toggled() -> void:
 	var now_anchored: bool = not NavManager.is_anchored
 	NavManager.set_anchored(now_anchored)
-	btn_anchor_toggle.text = "Lift Anchor" if now_anchored else "Drop Anchor"
 
 
 func _highlight_marker_for_region(id: String) -> void:

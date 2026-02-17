@@ -29,7 +29,7 @@ const KM_TO_UNITS: float = 1.0
 
 # World bounds (adjust to your map)
 const NAV_BOUNDS := Rect2(
-	Vector2(-200.0, -200.0),
+	Vector2(0.0, 0.0),
 	Vector2(2750.0, 1550.0)
 )
 
@@ -214,7 +214,7 @@ func _update_estimate_after_travel(distance_km: float) -> void:
 
 	var drift: Vector2 = _compute_drift(distance_km)
 
-	est_ship_pos += ideal_delta + drift
+	est_ship_pos += ideal_delta #+ drift
 	est_ship_pos = _clamp_to_bounds(est_ship_pos)
 
 	_update_error_radius(distance_km, drift.length())

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://23mfwfghdgw4" path="res://scenes/views/MapView.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://cwdt52x2rmng1" path="res://scenes/views/EventView.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://baq2lt5qgsmyf" path="res://scenes/views/LogView.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://scenes/views/ToolsView.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://ckgvddqjc2gmo" path="res://scenes/views/ToolsView.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://ds7x4i7rfyii8" path="res://scenes/views/CrewView.tscn" id="6"]
 
 [sub_resource type="StyleBoxFlat" id="1"]
@@ -112,7 +112,12 @@ layout_mode = 1
 [node name="ToolsView" parent="MarginContainer/VBoxContainer/PanelContainer/ViewsContainer" instance=ExtResource("5")]
 unique_name_in_owner = true
 visible = false
+layout_mode = 0
 anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="CrewView" parent="MarginContainer/VBoxContainer/PanelContainer/ViewsContainer" instance=ExtResource("6")]
 unique_name_in_owner = true
