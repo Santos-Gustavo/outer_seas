@@ -1,15 +1,16 @@
 {
   "events": {
 	"cap_dock_arrival": {
-	  "id": "cap_dock_arrival",
-	  "title": "Arrival at Capital Island",
-	  "location": "capital",
-	  "once": true,
-	  "triggers": ["start"],
-	  "text": [
+		"id": "cap_dock_arrival",
+		"title": "Arrival at Capital Island",
+		"location": "capital",
+		"radius": 100,
+		"once": true,
+		"triggers": ["start"],
+		"text": [
 		"Your ship eases into the harbor of Capital Island under a sky crowded with flags.",
 		"Marines in crisp uniforms wave you toward an inspection pier. Loudspeakers repeat that the World Government keeps this sea safe.",
-        "Crew eyes drift between the spotless docks and the distant silhouettes of patrol ships."
+		"Crew eyes drift between the spotless docks and the distant silhouettes of patrol ships."
 	  ],
 	  "choices": [
 		{

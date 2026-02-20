@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://23mfwfghdgw4"]
+[gd_scene load_steps=11 format=3 uid="uid://23mfwfghdgw4"]
 
 [ext_resource type="Script" uid="uid://bsxl4ndcj40yt" path="res://scripts/MapView.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://5vd6bqw0nh4k" path="res://assets/map_base.png" id="2_y0qwx"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dsf47ess7g12h" path="res://scenes/views/NavLogPanel.tscn" id="5_neov0"]
 [ext_resource type="Texture2D" uid="uid://dlra24pfn1pco" path="res://assets/Previews/pngwing.com (1).png" id="5_pkt6l"]
 [ext_resource type="Script" uid="uid://d0wdxd860gc7v" path="res://scripts/UncertaintyOverlay.gd" id="5_w776d"]
+[ext_resource type="Texture2D" uid="uid://chx0praj7ohnk" path="res://assets/Previews/chest.png" id="6_7ysx3"]
 [ext_resource type="Texture2D" uid="uid://bo6yrret6e1q4" path="res://assets/Previews/pngwing.com (2).png" id="6_pkt6l"]
 [ext_resource type="Texture2D" uid="uid://y7pfjtixltpk" path="res://assets/Previews/pngwing.com.png" id="7_w776d"]
 
@@ -60,14 +61,18 @@ grow_vertical = 2
 [node name="CityMarker" type="TextureRect" parent="MapViewport/MapContent/Markers"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -32.0
-offset_right = 32.0
-offset_bottom = 64.0
+anchors_preset = -1
+anchor_left = 0.13700001
+anchor_top = 0.109000005
+anchor_right = 0.13700001
+anchor_bottom = 0.109000005
+offset_left = -103.04001
+offset_top = 144.28
+offset_right = -73.04001
+offset_bottom = 176.28
 grow_horizontal = 2
 texture = ExtResource("4_xqd6u")
+expand_mode = 1
 
 [node name="ShipMarker" type="TextureRect" parent="MapViewport"]
 unique_name_in_owner = true
@@ -94,6 +99,7 @@ offset_bottom = 40.0
 script = ExtResource("5_w776d")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -254,3 +260,23 @@ grow_vertical = 2
 size_flags_vertical = 3
 texture = ExtResource("5_pkt6l")
 expand_mode = 2
+
+[node name="MapItems" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ChestMarker" type="TextureRect" parent="MapItems"]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.080000006
+anchor_top = 0.105000004
+anchor_right = 0.080000006
+anchor_bottom = 0.105000004
+offset_left = 150.8
+offset_top = 108.8
+offset_right = 214.8
+offset_bottom = 172.8
+texture = ExtResource("6_7ysx3")

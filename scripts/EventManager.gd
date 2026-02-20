@@ -1,5 +1,5 @@
 extends Node
-class_name Event_Manager
+#class_name Event_Manager
 
 signal event_started(event_id: String)
 signal event_finished(event_id: String)
@@ -44,6 +44,7 @@ func _load_events() -> void:
 	events.clear()
 	for id in raw_events.keys():
 		var e: Dictionary = raw_events[id]
+		print(e)
 		# Ensure id is set inside each event
 		e["id"] = id
 		events[id] = e

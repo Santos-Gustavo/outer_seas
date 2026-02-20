@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://exn5x1cp0cdl"]
+[gd_scene load_steps=11 format=3 uid="uid://exn5x1cp0cdl"]
 
 [ext_resource type="Script" uid="uid://p76wkkok3fbn" path="res://scripts/Bridge.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://23mfwfghdgw4" path="res://scenes/views/MapView.tscn" id="2"]
@@ -6,7 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://baq2lt5qgsmyf" path="res://scenes/views/LogView.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://ckgvddqjc2gmo" path="res://scenes/views/ToolsView.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://ds7x4i7rfyii8" path="res://scenes/views/CrewView.tscn" id="6"]
-[ext_resource type="PackedScene" uid="uid://dp7y6s30f27e0" path="res://scenes/views/BattleView.tscn" id="7_ksuyr"]
+[ext_resource type="PackedScene" uid="uid://dp7y6s30f27e0" path="res://scenes/views/BatteView.tscn" id="7_ksuyr"]
+
+[sub_resource type="Gradient" id="Gradient_2ol2o"]
+offsets = PackedFloat32Array(0, 0.5133333)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ksuyr"]
+gradient = SubResource("Gradient_2ol2o")
+height = 33
 
 [sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(0.11, 0.13, 0.18, 1)
@@ -41,17 +48,12 @@ grow_vertical = 2
 color = Color(0.9079417, 0.9079417, 0.90794164, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 top_level = true
@@ -79,11 +81,6 @@ size_flags_horizontal = 8
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="BattleButton" type="Button" parent="MarginContainer/VBoxContainer/TopBar/NavButtons"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Battle"
-
 [node name="MapButton" type="Button" parent="MarginContainer/VBoxContainer/TopBar/NavButtons"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -109,8 +106,13 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Event"
 
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+visible = false
+z_index = 2
+layout_mode = 2
+texture = SubResource("GradientTexture2D_ksuyr")
+
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
-clip_contents = true
 layout_mode = 2
 theme_override_styles/panel = SubResource("1")
 
@@ -155,3 +157,10 @@ layout_mode = 1
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -22,6 +22,7 @@ LogManager="*res://scripts/LogManager.gd"
 NavManager="*res://scripts/NavManager.gd"
 NavEncounterManager="*res://scripts/NavEncounterManager.gd"
 ToolManager="*res://scripts/ToolManager.gd"
+BattleManager="*res://scripts/BattleManager.gd"
 
 [display]
 

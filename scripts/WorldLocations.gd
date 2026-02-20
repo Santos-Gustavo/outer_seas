@@ -3,10 +3,13 @@ extends Node
 var regions: Array = []
 
 const locations := {
-	"capital": Vector2(50, 50),
+	"capital": Vector2(50, 100),
 	"ashfall": Vector2(320, -120),
 	"storm_edge": Vector2(600, 50),
 }
+
+func _ready():
+	_init_regions()
 
 func get_position(id: String) -> Vector2:
 	if locations.has(id):
@@ -22,7 +25,7 @@ func _init_regions() -> void:
 			"type": "island",
 			"shape": "circle",
 			"center": get_position("capital"),
-			"radius": 50.0,
+			"radius": 200.0,
 			"event_on_enter": "cap_dock_arrival",
 			"hidden_event": true
 		},

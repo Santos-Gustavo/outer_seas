@@ -6,12 +6,14 @@ extends Control
 @onready var log_view: Control   = %LogView
 @onready var crew_view: Control  = %CrewView
 @onready var tool_view: Control  = %ToolsView
+@onready var battle_view: Control  = %BattleView
 
 @onready var btn_map: Button     = %MapButton
 @onready var btn_events: Button  = %EventsButton
 @onready var btn_log: Button     = %LogButton
 @onready var btn_crew: Button    = %CrewButton
 @onready var btn_tools: Button   = %ToolsButton
+@onready var btn_battle: Button   = %BattleButton
 
 var _views: Dictionary
 var _buttons: Dictionary
@@ -35,6 +37,9 @@ func _ready() -> void:
 	btn_tools.pressed.connect(func() -> void:
 		_set_active_view("tools")
 	)
+	btn_battle.pressed.connect(func() -> void:
+		_set_active_view("battle")
+	)
 
 	# Auto-switch to Event view when an event starts
 	EventManager.event_started.connect(func(_id: String) -> void:
@@ -52,6 +57,7 @@ func _init_views_and_buttons() -> void:
 		"log": log_view,
 		"crew": crew_view,
 		"tools": tool_view,
+		"battle": battle_view
 	}
 
 	_buttons = {
@@ -60,6 +66,7 @@ func _init_views_and_buttons() -> void:
 		"log": btn_log,
 		"crew": btn_crew,
 		"tools": btn_tools,
+		"battle": btn_battle
 	}
 
 

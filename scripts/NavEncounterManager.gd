@@ -5,14 +5,13 @@ signal region_entered(id: String)
 signal region_exited(id: String)
 
 # List of regions (islands, hazards, etc.)
-var regions: Array = WorldLocations.regions
+var regions: Dictionary = EventManager.events
 
 # Internal: which regions we're currently inside (id -> true)
 var _active_region_ids: Dictionary = {}
 
 
 func _ready() -> void:
-	WorldLocations._init_regions()
 	# Listen to navigation updates from NavManager
 	NavManager.position_changed.connect(_on_nav_position_changed)
 
@@ -22,7 +21,8 @@ func _ready() -> void:
 # -------------------------------------------------------------------
 
 func _on_nav_position_changed(true_pos: Vector2, est_pos: Vector2, error_radius: float) -> void:
-	_update_regions_for_position(true_pos)
+	#_update_regions_for_position(true_pos)
+	pass
 
 
 # -------------------------------------------------------------------
@@ -33,6 +33,7 @@ func _update_regions_for_position(pos: Vector2) -> void:
 	var new_region_ids: Dictionary = {}  # id -> true
 
 	# Find all regions that contain this position
+	#print(regions)
 	for region in regions:
 		print(region)
 		if _position_inside_region(pos, region):

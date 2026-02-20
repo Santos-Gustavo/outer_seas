@@ -73,6 +73,12 @@ func _unhandled_key_input(event: InputEvent):
 			NavManager.set_time_scale(3.0)
 		if event.pressed and event.keycode == KEY_3:
 			NavManager.set_time_scale(5.0)
+		
+		if event.pressed and event.keycode == KEY_P:
+			EventManager.start_event('cap_dock_arrival')
+		
+		if event.pressed and event.keycode == KEY_B:
+			BattleManager.start_battle()
 
 
 
@@ -98,7 +104,7 @@ func _update_map_window(est_pos: Vector2) -> void:
 
 func _set_city_marker_position() -> void:
 	# For now, just a fixed position; later you can map world coords
-	city_marker.position = Vector2(50.0, 100.0)
+	city_marker.position = Vector2(50.0, 100.0) * MAP_SCALE + MAP_OFFSET
 
 
 func _on_nav_position_changed(true_pos: Vector2, est_pos: Vector2, error_radius: float) -> void:
