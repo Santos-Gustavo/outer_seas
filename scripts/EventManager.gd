@@ -44,7 +44,6 @@ func _load_events() -> void:
 	events.clear()
 	for id in raw_events.keys():
 		var e: Dictionary = raw_events[id]
-		print(e)
 		# Ensure id is set inside each event
 		e["id"] = id
 		events[id] = e

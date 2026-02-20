@@ -1,17 +1,19 @@
 extends Control
-#class_name Battle_Manager
 
-signal current_battle_change(battle: Dictionary)
+signal battle_started(battle_id: String)
+signal battle_finished(event_id: String)
+signal current_battle_changed(battle: Dictionary)
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
-	current_battle_change.emit({"test3": "test4"})
+	current_battle_changed.emit({"test3": "test4"})
 
 
 func start_battle():
+	print("Starting battle")
 	NavManager.set_time_scale(0.0)
-	current_battle_change.emit({"test": "test1"})
-
+	battle_started.emit("battle")
+	current_battle_changed.emit(battle_started)
 
 
 func current_battle() -> String:

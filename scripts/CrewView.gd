@@ -2,6 +2,7 @@ extends Control
 class_name CrewView
 
 var crew := [
+	{"name": "Going Merry – Boat", "desc": "The boat."},
 	{"name": "Nami – Navigator", "desc": "Trusts the charts and the Government. For now."},
 	{"name": "Rook – Boatswain", "desc": "Old sailor, grumbles about 'things not adding up'."},
 	{"name": "Isha – Comms", "desc": "Handles the Den Den Mushi and listens more than she speaks."}

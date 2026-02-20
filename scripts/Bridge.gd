@@ -45,6 +45,10 @@ func _ready() -> void:
 	EventManager.event_started.connect(func(_id: String) -> void:
 		_set_active_view("event")
 	)
+	BattleManager.battle_started.connect(func(_id: String) -> void:
+		print("BATTLE STARTED:")
+		_set_active_view("battle")
+	)
 
 	# Initial view
 	_set_active_view("map")

@@ -9,25 +9,23 @@ extends Node
 var p_name = "Luffy"
 
 
-
 func _ready() -> void:
-	BattleManager.current_battle_change.connect(_on_current_event_changed)
+	if not CrewManager.crew_hp.is_connected(_on_crew_connect):
+		CrewManager.crew_hp.connect(_on_crew_connect)
+
+	CrewManager.request_crew_hp()
 	
 	var current := BattleManager.current_battle()
 	_on_current_event_changed(current)
 
 
 func _on_current_event_changed(text) -> void:
-	print(text)
 	_populate_choices()
 
 
 func _populate_choices():
 	var screens = [player_choices, enemy_choices]
-	player_name.add_text(p_name)
-	
-	CrewManager.crew_hp.connect(_on_crew_connect)
-	CrewManager.request_crew_hp()
+	player_name.add_text(p_name)	
 
 	for screen in screens:
 		_clear_choices(screen)

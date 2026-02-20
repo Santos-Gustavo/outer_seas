@@ -1,5 +1,4 @@
 extends Node
-#class_name NavManager
 
 signal position_changed(true_pos: Vector2, estimated_pos: Vector2, error_radius: float)
 signal heading_changed(new_heading_deg: float)
@@ -30,7 +29,7 @@ const KM_TO_UNITS: float = 1.0
 # World bounds (adjust to your map)
 const NAV_BOUNDS := Rect2(
 	Vector2(0.0, 0.0),
-	Vector2(2750.0, 1550.0)
+	Vector2(1880.0, 1020.0)
 )
 
 
@@ -200,8 +199,6 @@ func _move_true_position(distance_km: float) -> float:
 	var actual_delta: Vector2 = clamped_pos - ship_pos
 	var actual_distance: float = actual_delta.length() / KM_TO_UNITS
 
-	#if actual_distance < distance_km:
-		#nav_message.emit("The sea seems to end here. You can't sail further in that direction.")
 
 	ship_pos = clamped_pos
 	return actual_distance

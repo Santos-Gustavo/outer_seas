@@ -33,9 +33,7 @@ func _update_regions_for_position(pos: Vector2) -> void:
 	var new_region_ids: Dictionary = {}  # id -> true
 
 	# Find all regions that contain this position
-	#print(regions)
 	for region in regions:
-		print(region)
 		if _position_inside_region(pos, region):
 			new_region_ids[region["id"]] = true
 
