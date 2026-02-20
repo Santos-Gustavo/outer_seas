@@ -56,9 +56,13 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Name"
 
-[node name="CrewDesc" type="RichTextLabel" parent="MarginContainer/HBoxContainer/Right"]
+[node name="CrewDesc" type="Label" parent="MarginContainer/HBoxContainer/Right"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-bbcode_enabled = true
 text = "Select a crew member."
+
+[node name="CrewStatus" type="Label" parent="MarginContainer/HBoxContainer/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3

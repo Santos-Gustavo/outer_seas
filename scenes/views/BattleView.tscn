@@ -42,11 +42,13 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 
-[node name="Name" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/PlayerContainer/PlayerInfo"]
+[node name="PlayerName" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/PlayerContainer/PlayerInfo"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HP" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/PlayerContainer/PlayerInfo"]
+[node name="PlayerHP" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/PlayerContainer/PlayerInfo"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -54,10 +56,59 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="PlayerPosition" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PlayerContainer/Choices"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerFirePolicy" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PlayerContainer/Choices"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerRange" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PlayerContainer/Choices"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerAggressivity" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PlayerContainer/Choices"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerAimFocus" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PlayerContainer/Choices"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="EnemyContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="EnemyInfo" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/EnemyContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="EnemyName" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/EnemyContainer/EnemyInfo"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EnemyHP" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/EnemyContainer/EnemyInfo"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="Choices" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/EnemyContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EnemyPositionChoices" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/EnemyContainer/Choices"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EnemyAttackChoices" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/EnemyContainer/Choices"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
