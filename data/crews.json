@@ -1,50 +1,140 @@
 {
+  "schema_version": 1,
+  "crews": {
 	"main": {
-		"Going Merry": {
-			"name": "Going Merry",
-			"id": "Boat", 
-			"desc": "The boat.", 
-			"Hull": 100, "Mast": 100, "Rudder": 100, "Crow's Nest": 100, "Gunport": 100, "Bow Chaser": 100
-			},
-		"Nami": {
-			"name": "Nami",
-			"id": "Crew", 
-			"desc": "Trusts the charts and the Government. For now.", 
-			"Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10
-			},
-		"Rook": {
-			"name": "Rook",
-			"id": "Crew", 
-			"desc": "Old sailor, grumbles about 'things not adding up'.", 
-			"Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10
-			},
-		"Isha": {
-			"name": "Isha",
-			"id": "Crew", 
-			"desc": "Handles the Den Den Mushi and listens more than she speaks.", 
-			"Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10
-			}
+	  "id": "main",
+	  "name": "Main Crew",
+	  "boat": {
+		"type": "boat",
+		"id": "going_merry",
+		"name": "Going Merry",
+		"desc": "The boat.",
+		"parts": {
+		  "Hull": 100,
+		  "Mast": 100,
+		  "Rudder": 100,
+		  "Crow's Nest": 100,
+		  "Gunport": 100,
+		  "Bow Chaser": 100
 		},
-	"second": {
-		"Going Merry": {
-			"ID": "Boat", 
-			"desc": "The boat.", 
-			"Hull": 100, "Mast": 100, "Rudder": 100, "Crow's Nest": 100, "Gunport": 100, "Bow Chaser": 100
-			},
-		"Nami": {
-			"ID": "Crew", 
-			"desc": "Trusts the charts and the Government. For now.", 
-			"Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10
-			},
-		"Rook": {
-			"ID": "Crew", 
-			"desc": "Old sailor, grumbles about 'things not adding up'.", 
-			"Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10
-			},
-		"Isha": {
-			"ID": "Crew", 
-			"desc": "Handles the Den Den Mushi and listens more than she speaks.", 
-			"Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10
-			}
+		"specs": {
+		  "armor": 0,
+		  "handling": 0,
+		  "speed": 0
 		}
+	  },
+	  "members": [
+		{
+		  "type": "crew",
+		  "id": "nami",
+		  "name": "Nami",
+		  "desc": "Trusts the charts and the Government. For now.",
+		  "stats": {
+			"Helmsmanship": 100,
+			"Sail Handling": 10,
+			"Gunnery": 10,
+			"Reload": 10,
+			"Damage Control": 10,
+			"Recon": 10
+		  }
+		},
+		{
+		  "type": "crew",
+		  "id": "rook",
+		  "name": "Rook",
+		  "desc": "Old sailor, grumbles about 'things not adding up'.",
+		  "stats": {
+			"Helmsmanship": 10,
+			"Sail Handling": 10,
+			"Gunnery": 10,
+			"Reload": 10,
+			"Damage Control": 10,
+			"Recon": 10
+		  }
+		},
+		{
+		  "type": "crew",
+		  "id": "isha",
+		  "name": "Isha",
+		  "desc": "Handles the Den Den Mushi and listens more than she speaks.",
+		  "stats": {
+			"Helmsmanship": 10,
+			"Sail Handling": 10,
+			"Gunnery": 10,
+			"Reload": 10,
+			"Damage Control": 10,
+			"Recon": 10
+		  }
+		}
+	  ]
+	},
+
+	"second": {
+	  "id": "second",
+	  "name": "Second Crew",
+	  "boat": {
+		"type": "boat",
+		"id": "hat_trick",
+		"name": "Hat Trick",
+		"desc": "The boat.",
+		"parts": {
+		  "Hull": 100,
+		  "Mast": 100,
+		  "Rudder": 100,
+		  "Crow's Nest": 100,
+		  "Gunport": 100,
+		  "Bow Chaser": 100
+		},
+		"specs": {
+		  "armor": 0,
+		  "handling": 0,
+		  "speed": 0
+		}
+	  },
+	  "members": [
+		{
+		  "type": "crew",
+		  "id": "jeremias",
+		  "name": "Jeremias",
+		  "desc": "Trusts the charts and the Government. For now.",
+		  "stats": {
+			"Helmsmanship": 5,
+			"Sail Handling": 8,
+			"Gunnery": 0,
+			"Reload": 1,
+			"Damage Control": 1,
+			"Recon": 1
+		  }
+		},
+		{
+		  "type": "crew",
+		  "id": "rochele",
+		  "name": "Rochele",
+		  "desc": "Old sailor, grumbles about 'things not adding up'.",
+		  "stats": {
+			"Helmsmanship": 1,
+			"Sail Handling": 1,
+			"Gunnery": 0,
+			"Reload": 0,
+			"Damage Control": 0,
+			"Recon": 1
+		  }
+		},
+		{
+		  "type": "crew",
+		  "id": "clementina",
+		  "name": "Clementina",
+		  "desc": "Handles the Den Den Mushi and listens more than she speaks.",
+		  "stats": {
+			"Helmsmanship": 1,
+			"Sail Handling": 1,
+			"Gunnery": 0,
+			"Reload": 0,
+			"Damage Control": 0,
+			"Recon": 1
+		  }
+		}
+	  ]
 	}
+  }
+}

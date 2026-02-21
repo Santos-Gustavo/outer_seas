@@ -1,86 +1,88 @@
-extends Control
+extends Node
 
 signal battle_started(battle_id: String)
 signal battle_finished(event_id: String)
 signal current_battle_changed(battle: Dictionary)
 
+var rng := RandomNumberGenerator.new()
 
-var player_helmsmanship
-var player_sail_handling
-var player_gunnery
-var player_reload
-var player_damage_control
-var player_recon
+# Player stats (filled from CrewManager)
+var player_stats: Dictionary = {}
 
+# Enemy stats (stub for now — you should replace later with enemy data)
+var enemy_stats: Dictionary = {}
 
-var enemy_helmsmanship
-var enemy_sail_handling
-var enemy_gunnery
-var enemy_reload
-var enemy_damage_control
-var enemy_recon
+# These should come from your selection system later
+var fire_hit_mod := 0.0
+var range_hit_mod := 0.0
+var agg_hit_mod := 0.0
+var aim_hit_mod := 0.0
 
-
-var fire_hit_mod = 1
-var fire_ammo_cost = 1
-var fire_dmg_mod = 1
-var range_hit_mod = 1
-var range_dmg_mod = 1
-var agg_pos_mod = 1
-var agg_hit_mod = 1
-var agg_def_mod = 1
+var fire_ammo_cost = 1 
+var fire_dmg_mod = 1 
+var range_dmg_mod = 1 
+var agg_pos_mod = 1 
+var agg_def_mod = 1 
 var agg_dmg_mod = 1
-var aim_hit_mod = 1
 var aim_dmg_multiplier = 1
-
 
 
 var round_modifiers := {
 	"pos": "Parallel",
-	"agg": 30,
-	"fire": 10,
-	"range": 10,
+	"agg": 0,       # recommend: index, not 30
+	"fire": 0,      # recommend: index
+	"range": 0,     # recommend: index
 	"aim": "Hull"
 }
 
-
-
 func _ready() -> void:
-	current_battle_changed.emit({"test3": "test4"})
+	rng.randomize()
 
-	CrewManager.crew_status.connect(_on_player_crew_status)
-	CrewManager.crew_status.connect(_on_enemy_crew_status)
-	CrewManager.request_crew_status()
+	if not CrewManager.crew_stats_changed.is_connected(_on_player_crew_stats_changed):
+		CrewManager.crew_stats_changed.connect(_on_player_crew_stats_changed)
 
+	player_stats = CrewManager.get_crew_stats_by_id("main")
 
-func _on_player_crew_status(helmsmanship, sail_handling, gunnery, reload, damage_control, recon):
-	player_helmsmanship = helmsmanship
-	player_sail_handling = sail_handling
-	player_gunnery = gunnery
-	player_reload = reload
-	player_damage_control = damage_control
-	player_recon = recon
+	current_battle_changed.emit({"state": "idle"})
 
+func _on_player_crew_stats_changed(stats: Dictionary) -> void:
+	player_stats = stats
 
-func _on_enemy_crew_status(helmsmanship, sail_handling, gunnery, reload, damage_control, recon):
-	enemy_helmsmanship = helmsmanship
-	enemy_sail_handling = sail_handling
-	enemy_gunnery = gunnery
-	enemy_reload = reload
-	enemy_damage_control = damage_control
-	enemy_recon = recon
-
-
-func start_battle():
-	print("Starting battle")
+func start_battle(enemy_crew_id: String) -> void:
+	print("Starting battle vs:", enemy_crew_id)
 	NavManager.set_time_scale(0.0)
-	battle_started.emit("battle")
-	current_battle_changed.emit(battle_started)
 
+	player_stats = CrewManager.get_crew_stats_by_id("main")  # active player crew
+	enemy_stats  = CrewManager.get_crew_stats_by_id(enemy_crew_id)
 
-func current_battle() -> String:
-	return "Aloha"
+	# Emit once, with one coherent state payload
+	battle_started.emit(enemy_crew_id)
+	current_battle_changed.emit({
+		"state": "active",
+		"enemy_id": enemy_crew_id,
+		"round_modifiers": round_modifiers
+	})
 
+func _check_hit() -> bool:
+	# Defender roll (replace later with real defense system)
+	print(player_stats)
+	print(enemy_stats)
+	var def_value := (
+		float(enemy_stats.get("Helmsmanship", 0.0))
+		+ float(player_stats.get("Sail Handling", 0.0))
+		)
+
+	# Attacker value (your logic, but now safe + explicit)
+	var atk_value := (
+		float(player_stats.get("Helmsmanship", 0.0)) 
+		+ float(player_stats.get("Gunnery", 0.0))
+		+ float(player_stats.get("Sail Handling", 0.0))
+		+ fire_hit_mod + range_hit_mod + agg_hit_mod - aim_hit_mod
+		)
+
+	#print("Hit check: atk=", atk_value, " def=", def_value)
+
+	return atk_value > def_value
 
 func choose_position(pos):
 
@@ -184,18 +186,8 @@ func choose_aim_policy(aim):
 		return
 	round_modifiers["aim"] = aim
 
-func _check_hit():
-	var rng = RandomNumberGenerator.new()
-	var def_value = rng.randf_range(1.0, 50.0)
-
-	var atk_value = float(player_helmsmanship + player_gunnery + player_sail_handling + fire_hit_mod + range_hit_mod + agg_hit_mod - aim_hit_mod)
-	print("%s % hit chance: ", atk_value)
-	if atk_value > def_value:
-		return 1
-
-func _check_damage():
+func _check_damage() -> float:
 	var atk_value = (fire_dmg_mod + range_dmg_mod + agg_dmg_mod) * aim_dmg_multiplier
-	print(atk_value)
 
 	return atk_value
 

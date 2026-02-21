@@ -17,13 +17,13 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 [autoload]
 
 WorldLocations="*res://scripts/WorldLocations.gd"
+CrewManager="*res://scripts/CrewManager.gd"
 EventManager="*res://scripts/EventManager.gd"
 LogManager="*res://scripts/LogManager.gd"
 NavManager="*res://scripts/NavManager.gd"
 NavEncounterManager="*res://scripts/NavEncounterManager.gd"
-ToolManager="*res://scripts/ToolManager.gd"
 BattleManager="*res://scripts/BattleManager.gd"
-CrewManager="*res://scripts/CrewManager.gd"
+ToolManager="*res://scripts/ToolManager.gd"
 
 [display]
 

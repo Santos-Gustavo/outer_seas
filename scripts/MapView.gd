@@ -78,7 +78,7 @@ func _unhandled_key_input(event: InputEvent):
 			EventManager.start_event('cap_dock_arrival')
 		
 		if event.pressed and event.keycode == KEY_B:
-			BattleManager.start_battle()
+			BattleManager.start_battle("second")
 
 
 

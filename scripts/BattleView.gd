@@ -25,20 +25,22 @@ const AIM_FOCUS := ["Hull", "Mast", "Rudder", "Crow's Nest", "Gunport", "Bow Cha
 
 var p_name := "Luffy"
 
-
 func _ready() -> void:
 	_connect_signals_once()
 	_init_static_ui()
 
-
 func _connect_signals_once() -> void:
-	if not CrewManager.crew_hp.is_connected(_on_crew_connect):
-		CrewManager.crew_hp.connect(_on_crew_connect)
+	if not CrewManager.crew_hp_changed.is_connected(_on_crew_hp_changed):
+		CrewManager.crew_hp_changed.connect(_on_crew_hp_changed)
 
-
+func _on_crew_hp_changed(maxv: float, minv: float, currentv: float) -> void:
+	player_hp.min_value = minv
+	player_hp.max_value = maxv
+	player_hp.value = currentv
+	
 func _init_static_ui() -> void:
 	player_name.text = p_name
-	CrewManager.request_crew_hp()
+	_on_crew_hp_changed(100.0, 0.0, CrewManager.get_boat_integrity())
 
 	_build_choice_buttons()
 	end_turn.pressed.connect(_on_end_turn_pressed)
