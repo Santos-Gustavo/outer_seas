@@ -7,12 +7,7 @@ signal complete_crew_status(crew)
 const SHIP_PARTS := ["Hull", "Mast", "Rudder", "Crow's Nest", "Gunport", "Bow Chaser"]
 
 
-var crew := [
-	{"ID": "Boat", "name": "Going Merry – Boat", "desc": "The boat.", "Hull": 100, "Mast": 100, "Rudder": 100, "Crow's Nest": 100, "Gunport": 100, "Bow Chaser": 100},
-	{"ID": "Crew", "name": "Nami – Navigator", "desc": "Trusts the charts and the Government. For now.", "Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10},
-	{"ID": "Crew", "name": "Rook – Boatswain", "desc": "Old sailor, grumbles about 'things not adding up'.", "Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10},
-	{"ID": "Crew", "name": "Isha – Comms", "desc": "Handles the Den Den Mushi and listens more than she speaks.", "Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10}
-]
+var crew: Array = []
 
 
 var max_hp := 100.0
@@ -25,6 +20,41 @@ var gunnery = 5
 var reload = 10
 var damage_control = 10
 var recon = 10
+
+var crews: Dictionary = {}  
+
+
+func _ready():
+	_load_crews()
+	for member in crews['main'].keys():
+		if not member == 'id':
+			crew.append(crews['main'][member])
+
+
+func _load_crews() -> void:
+	var path := "res://data/crews.json"
+	if not FileAccess.file_exists(path):
+		push_error("EventManager: events.json not found at " + path)
+		return
+
+	var file := FileAccess.open(path, FileAccess.READ)
+	var raw := file.get_as_text()
+	file.close()
+
+	var parsed = JSON.parse_string(raw)
+	if typeof(parsed) != TYPE_DICTIONARY:
+		push_error("CrewtManager: failed to parse events.json")
+		return
+
+	if not parsed.has("main"):
+		push_error("CrewtManager: 'main' key missing in JSON")
+		return
+
+	crews.clear()
+	for id in parsed.keys():
+		var e: Dictionary = parsed[id]
+		e["id"] = id
+		crews[id] = e
 
 
 func request_complete_crew_status():

@@ -12,14 +12,14 @@ const CREW_STATUS := ["Helmsmanship", "Sail Handling", "Gunnery", "Reload", "Dam
 @onready var crew_hp_now: ProgressBar = %CrewHP
 
 
-var complete_crew
+var complete_crew : Array = []
 
 func _ready() -> void:
 	CrewManager.complete_crew_status.connect(_on_complete_crew_connect)
 	CrewManager.request_complete_crew_status()
 	
-	for member in complete_crew:
-		crew_list.add_item(member["name"])
+	for inner in complete_crew:
+		crew_list.add_item(inner['name'])
 	crew_list.item_selected.connect(_on_crew_selected)
 	
 	if complete_crew.size() > 0:
@@ -42,16 +42,18 @@ func _on_crew_connect(maxv, minv, currentv):
 
 
 func _on_crew_selected(index: int) -> void:
+	#print(complete_crew)
 	var member = complete_crew[index]
-	lbl_name.text = member["name"]
-	lbl_desc.text = member["desc"]
-	var lines: Array[String] = []
-	
-	if member["ID"] == "Boat":
-		for part in SHIP_PARTS:
-			lines.append("%s: %s" % [part, str(member[part])])
-		lbl_status.text = "\n".join(lines)
-	else:
-		for part in CREW_STATUS:
-			lines.append("%s: %s" % [part, str(member[part])])
-		lbl_status.text = "\n".join(lines)
+	for key in member.keys():
+		lbl_name.text = member["name"]
+		lbl_desc.text = member["desc"]
+		var lines: Array[String] = []
+		
+		if member["id"] == "Boat":
+			for part in SHIP_PARTS:
+				lines.append("%s: %s" % [part, str(member[part])])
+			lbl_status.text = "\n".join(lines)
+		else:
+			for part in CREW_STATUS:
+				lines.append("%s: %s" % [part, str(member[part])])
+			lbl_status.text = "\n".join(lines)

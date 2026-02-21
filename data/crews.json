@@ -1,0 +1,50 @@
+{
+	"main": {
+		"Going Merry": {
+			"name": "Going Merry",
+			"id": "Boat", 
+			"desc": "The boat.", 
+			"Hull": 100, "Mast": 100, "Rudder": 100, "Crow's Nest": 100, "Gunport": 100, "Bow Chaser": 100
+			},
+		"Nami": {
+			"name": "Nami",
+			"id": "Crew", 
+			"desc": "Trusts the charts and the Government. For now.", 
+			"Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10
+			},
+		"Rook": {
+			"name": "Rook",
+			"id": "Crew", 
+			"desc": "Old sailor, grumbles about 'things not adding up'.", 
+			"Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10
+			},
+		"Isha": {
+			"name": "Isha",
+			"id": "Crew", 
+			"desc": "Handles the Den Den Mushi and listens more than she speaks.", 
+			"Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10
+			}
+		},
+	"second": {
+		"Going Merry": {
+			"ID": "Boat", 
+			"desc": "The boat.", 
+			"Hull": 100, "Mast": 100, "Rudder": 100, "Crow's Nest": 100, "Gunport": 100, "Bow Chaser": 100
+			},
+		"Nami": {
+			"ID": "Crew", 
+			"desc": "Trusts the charts and the Government. For now.", 
+			"Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10
+			},
+		"Rook": {
+			"ID": "Crew", 
+			"desc": "Old sailor, grumbles about 'things not adding up'.", 
+			"Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10
+			},
+		"Isha": {
+			"ID": "Crew", 
+			"desc": "Handles the Den Den Mushi and listens more than she speaks.", 
+			"Helmsmanship": 10, "Sail Handling": 10, "Gunnery": 10, "Reload": 10, "Damage Control": 10, "Recon": 10
+			}
+		}
+	}
